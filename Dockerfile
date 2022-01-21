@@ -1,10 +1,8 @@
 FROM ubuntu:18.04
 
-LABEL maintainer="sean@seancook.dev"
+LABEL maintainer="alireza"
 LABEL description="CPU-only version of OpenPose. Not slimmed for production."
 LABEL version="1.1"
-
-ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -y && \
     apt-get upgrade -y && \
@@ -51,7 +49,3 @@ RUN make -j$((`nproc`+1))
 RUN apt-get remove wget unzip cmake git build-essential -y && apt-get autoremove -y
 
 WORKDIR /openpose
-
-ENTRYPOINT ["build/examples/openpose/openpose.bin"]
-
-CMD ["--help"]
